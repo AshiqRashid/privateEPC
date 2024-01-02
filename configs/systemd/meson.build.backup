@@ -15,11 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-source_dir = join_paths(open5gs_source_dir, 'configs/systemd/')
-mean_dir = join_paths(open5gs_build_dir, 'configs/systemd/') 
-dest_dir = '/etc/systemd/system/'
-
-
 systemd_conf_in = '''
     open5gs-mmed.service
     open5gs-sgwcd.service
@@ -44,11 +39,7 @@ foreach file : systemd_conf_in
     configure_file(
             input : file + '.in',
             output : file,
-            configuration : conf_data)   
-endforeach
-
-foreach file : systemd_conf_in
-   install_data([join_paths(mean_dir, file)], install_dir: dest_dir)
+            configuration : conf_data)
 endforeach
 
 systemd_conf = '''
@@ -61,8 +52,4 @@ foreach file : systemd_conf
             input : file,
             output : file,
             configuration : conf_data)
-endforeach
-
-foreach file : systemd_conf
-   install_data([join_paths(mean_dir, file)], install_dir: dest_dir)
 endforeach

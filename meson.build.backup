@@ -34,7 +34,6 @@ sysconfdir = join_paths(prefix, get_option('sysconfdir'))
 localstatedir = join_paths(prefix, get_option('localstatedir'))
 
 open5gs_build_dir = meson.current_build_dir()
-open5gs_source_dir = meson.current_source_dir()
 
 cc = meson.get_compiler('c')
 host_system = host_machine.system()
@@ -173,7 +172,3 @@ if clangtidy.found()
         ]
     )
 endif
-
-op = '/var/log/open5gs'
-d = run_command('sudo','mkdir', '-p', op, check: true)
-a = run_command('sudo', 'chown', '-R', 'nybcell5gs:nybcell5gs', '@0@'.format(op), check: true)
